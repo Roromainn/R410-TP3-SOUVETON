@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annuaire</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Annuaire</h1>
+    <main>
+        <div class="directory">
+            <h2>Liste des personnes</h2>
+            <ul id="list">
+                <li>Toto</li>
+                <li class="selected">Jim</li>
+                <li>Sarah</li>
+            </ul>
+            <button>Ajouter</button>
+            <button>Téléphone</button>
+            <button>Supprimer</button>
+        </div>
+        <div class="add hidden">
+            <h2>Ajouter une personne</h2>
+            <label for="name">Nom :</label>
+            <input id="name" type="text" placeholder="Saisir le nom ici">
+            <label for="phone">Téléphone :</label>
+            <input id="phone" type="tel" placeholder="Saisir le téléphone ici">
+            <button>Valider</button>
+        </div>
+    </main>
+</body>
+</html>
