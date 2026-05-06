@@ -7,10 +7,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { People } from "./People.js";
+import { DaoError } from "./DaoError.js";
 export class PeopleDao {
+    constructor() {
+        this.apiUrl = "https://iutdijon.u-bourgogne.fr/intra/iq/webservices/annuaire/api.php";
+    }
     loadAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            return [];
+            try {
+                const response = yield fetch(this.apiUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                const data = yield response.json();
+                return data.map((obj) => People.fromRaw(obj));
+            }
+            catch (error) {
+                throw new DaoError(error instanceof Error ? error.message : "Unknown error loading people");
+            }
         });
     }
     add(people) {

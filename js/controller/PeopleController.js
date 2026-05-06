@@ -32,7 +32,18 @@ export class PeopleController {
     }
     list() {
         return __awaiter(this, void 0, void 0, function* () {
-            return [];
+            try {
+                const people = yield this.dao.loadAll();
+                for (let p of people) {
+                    this.notifyPeopleAdded(p);
+                }
+                return people;
+            }
+            catch (error) {
+                const message = error instanceof Error ? error.message : "Error loading people";
+                this.notifyError(message);
+                return [];
+            }
         });
     }
     add(people) {
