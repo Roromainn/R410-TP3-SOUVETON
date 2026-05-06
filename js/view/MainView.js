@@ -28,15 +28,22 @@ export class MainView {
         phoneSpan.classList.add("phone", "hidden");
         phoneSpan.innerText = people.phone;
         li.appendChild(phoneSpan);
+        li.addEventListener("click", () => this.select(li));
         this.list.appendChild(li);
     }
     peopleRemoved(people) {
-        // Implement in next steps
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.controller.list();
         });
+    }
+    select(element) {
+        const allItems = this.list.querySelectorAll("li");
+        for (let item of allItems) {
+            item.classList.remove("selected");
+        }
+        element.classList.add("selected");
     }
 }
 //# sourceMappingURL=MainView.js.map

@@ -24,7 +24,14 @@ export class PeopleDao {
                 return data.map((obj) => People.fromRaw(obj));
             }
             catch (error) {
-                throw new DaoError(error instanceof Error ? error.message : "Unknown error loading people");
+                let message;
+                if (error instanceof Error) {
+                    message = error.message;
+                }
+                else {
+                    message = "Unknown error loading people";
+                }
+                throw new DaoError(message);
             }
         });
     }

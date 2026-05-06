@@ -32,14 +32,24 @@ export class MainView implements Observer {
     phoneSpan.innerText = people.phone;
     li.appendChild(phoneSpan);
 
+    li.addEventListener("click", () => this.select(li));
     this.list.appendChild(li);
   }
 
   peopleRemoved(people: People): void {
-    // Implement in next steps
   }
 
   async init(): Promise<void> {
     await this.controller.list();
   }
+
+  select(element : HTMLLIElement):void{
+    const allItems = this.list.querySelectorAll("li");
+    for (let item of allItems) {
+      item.classList.remove("selected");
+    }
+
+    element.classList.add("selected");
+  }
+
 }

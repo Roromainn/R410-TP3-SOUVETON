@@ -40,7 +40,13 @@ export class PeopleController {
                 return people;
             }
             catch (error) {
-                const message = error instanceof Error ? error.message : "Error loading people";
+                let message;
+                if (error instanceof Error) {
+                    message = error.message;
+                }
+                else {
+                    message = "Error loading people";
+                }
                 this.notifyError(message);
                 return [];
             }
