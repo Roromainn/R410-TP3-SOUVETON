@@ -36,6 +36,8 @@ export class MainView {
     init() {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.controller.list();
+            const tel = document.getElementById("tel");
+            tel === null || tel === void 0 ? void 0 : tel.addEventListener("click", () => this.showphone());
         });
     }
     select(element) {
@@ -44,6 +46,11 @@ export class MainView {
             item.classList.remove("selected");
         }
         element.classList.add("selected");
+    }
+    showphone() {
+        const tel = document.querySelector(".selected .phone");
+        const txt = tel === null || tel === void 0 ? void 0 : tel.innerHTML;
+        alert(txt);
     }
 }
 //# sourceMappingURL=MainView.js.map
