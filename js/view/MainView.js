@@ -12,19 +12,30 @@ export class MainView {
         this.controller = ctrl;
         this.list = document.getElementById("list");
         this.controller.register(this);
+        this.init();
     }
     error(message) {
         alert(message);
     }
     peopleAdded(people) {
-        // Implement in next steps
+        const li = document.createElement("li");
+        li.innerText = people.name;
+        const idSpan = document.createElement("span");
+        idSpan.classList.add("id", "hidden");
+        idSpan.innerText = people.idpeople.toString();
+        li.appendChild(idSpan);
+        const phoneSpan = document.createElement("span");
+        phoneSpan.classList.add("phone", "hidden");
+        phoneSpan.innerText = people.phone;
+        li.appendChild(phoneSpan);
+        this.list.appendChild(li);
     }
     peopleRemoved(people) {
         // Implement in next steps
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {
-            // Implement in next steps
+            yield this.controller.list();
         });
     }
 }

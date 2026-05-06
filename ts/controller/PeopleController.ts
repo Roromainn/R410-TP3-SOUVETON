@@ -34,7 +34,22 @@ export class PeopleController implements Observable {
   }
 
   async list(): Promise<People[]> {
-    return [];
+    try {
+      const people = await this.dao.loadAll();
+      for (let p of people) {
+        this.notifyPeopleAdded(p);
+      }
+      return people;
+    } catch (error) {
+      let message: string;
+      if (error instanceof Error) {
+        message = error.message;
+      } else {
+        message = "Error loading people";
+      }
+      this.notifyError(message);
+      return [];
+    }
   }
 
   async add(people: People): Promise<void> {
