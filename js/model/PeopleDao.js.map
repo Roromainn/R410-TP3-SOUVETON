@@ -1,0 +1,1 @@
+{"version":3,"file":"PeopleDao.js","sourceRoot":"","sources":["../../ts/model/PeopleDao.ts"],"names":[],"mappings":";;;;;;;;;AAGA,MAAM,OAAO,SAAS;IACP,OAAO;;YAClB,OAAO,EAAE,CAAC;QACZ,CAAC;KAAA;IAEY,GAAG,CAAC,MAAc;;YAC7B,OAAO,MAAM,CAAC;QAChB,CAAC;KAAA;IAEY,MAAM,CAAC,MAAc;;YAChC,OAAO;QACT,CAAC;KAAA;CACF"}
