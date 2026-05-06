@@ -1,5 +1,5 @@
-import { People } from "./People";
-import { DaoError } from "./DaoError";
+import { People } from "./People.js";
+import { DaoError } from "./DaoError.js";
 
 export class PeopleDao {
   public async loadAll(): Promise<People[]> {

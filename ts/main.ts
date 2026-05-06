@@ -1,6 +1,6 @@
-import { PeopleDao } from "./model/PeopleDao";
-import { PeopleController } from "./controller/PeopleController";
-import { MainView } from "./view/MainView";
+import { PeopleDao } from "./model/PeopleDao.js";
+import { PeopleController } from "./controller/PeopleController.js";
+import { MainView } from "./view/MainView.js";
 
 window.onload = () => {
   let dao = new PeopleDao();

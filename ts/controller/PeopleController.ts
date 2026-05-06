@@ -1,7 +1,7 @@
-import { Observer } from "../view/Observer";
-import { Observable } from "../view/Observable";
-import { PeopleDao } from "../model/PeopleDao";
-import { People } from "../model/People";
+import { Observer } from "../view/Observer.js";
+import { Observable } from "../view/Observable.js";
+import { PeopleDao } from "../model/PeopleDao.js";
+import { People } from "../model/People.js";
 
 export class PeopleController implements Observable {
   private dao: PeopleDao;

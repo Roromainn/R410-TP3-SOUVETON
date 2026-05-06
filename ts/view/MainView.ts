@@ -1,7 +1,7 @@
-import { Observer } from "./Observer";
-import { Observable } from "./Observable";
-import { People } from "../model/People";
-import { PeopleController } from "../controller/PeopleController";
+import { Observer } from "./Observer.js";
+import { Observable } from "./Observable.js";
+import { People } from "../model/People.js";
+import { PeopleController } from "../controller/PeopleController.js";
 
 export class MainView implements Observer {
   private controller: PeopleController;
