@@ -59,6 +59,8 @@ export class MainView {
                 return;
             const people = People.fromRaw({ idpeople: parseInt(idSpan.innerHTML) });
             yield this.controller.remove(people);
+            const tel = document.getElementById("tel");
+            tel === null || tel === void 0 ? void 0 : tel.addEventListener("click", () => this.showphone());
         });
     }
     select(element) {
@@ -67,6 +69,11 @@ export class MainView {
             item.classList.remove("selected");
         }
         element.classList.add("selected");
+    }
+    showphone() {
+        const tel = document.querySelector(".selected .phone");
+        const txt = tel === null || tel === void 0 ? void 0 : tel.innerHTML;
+        alert(txt);
     }
 }
 //# sourceMappingURL=MainView.js.map

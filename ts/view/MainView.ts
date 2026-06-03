@@ -34,6 +34,7 @@ export class MainView implements Observer {
 
     li.addEventListener("click", () => this.select(li));
     this.list.appendChild(li);
+
   }
 
   peopleRemoved(people: People): void {
@@ -60,6 +61,8 @@ export class MainView implements Observer {
     if (!idSpan) return;
     const people = People.fromRaw({ idpeople: parseInt(idSpan.innerHTML) });
     await this.controller.remove(people);
+    const tel = document.getElementById("tel");
+    tel?.addEventListener("click", () => this.showphone())
   }
 
   select(element : HTMLLIElement):void{
@@ -69,6 +72,12 @@ export class MainView implements Observer {
     }
 
     element.classList.add("selected");
+  }
+
+  showphone(){
+    const tel = document.querySelector(".selected .phone",);
+    const txt = tel?.innerHTML;
+    alert(txt);
   }
 
 }
