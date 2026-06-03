@@ -38,10 +38,29 @@ export class MainView implements Observer {
   }
 
   peopleRemoved(people: People): void {
+    const items = document.querySelectorAll("span.id");
+    for (let node of items) {
+      if (node.innerHTML == people.idpeople.toString()) {
+        let parent = node.parentNode;
+        this.list.removeChild(parent as Node);
+        break;
+      }
+    }
   }
 
   async init(): Promise<void> {
     await this.controller.list();
+    const removeBtn = document.getElementById("remove");
+    removeBtn?.addEventListener("click", () => this.removePeople());
+  }
+
+  async removePeople(): Promise<void> {
+    const selected = this.list.querySelector("li.selected");
+    if (!selected) return;
+    const idSpan = selected.querySelector("span.id");
+    if (!idSpan) return;
+    const people = People.fromRaw({ idpeople: parseInt(idSpan.innerHTML) });
+    await this.controller.remove(people);
     const tel = document.getElementById("tel");
     tel?.addEventListener("click", () => this.showphone())
   }

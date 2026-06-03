@@ -42,7 +42,24 @@ export class PeopleDao {
     }
     remove(people) {
         return __awaiter(this, void 0, void 0, function* () {
-            return;
+            try {
+                const response = yield fetch(`${this.apiUrl}?id=${people.idpeople}`, {
+                    method: "DELETE"
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            }
+            catch (error) {
+                let message;
+                if (error instanceof Error) {
+                    message = error.message;
+                }
+                else {
+                    message = "Unknown error removing person";
+                }
+                throw new DaoError(message);
+            }
         });
     }
 }
