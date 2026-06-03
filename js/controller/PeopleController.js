@@ -59,7 +59,20 @@ export class PeopleController {
     }
     remove(people) {
         return __awaiter(this, void 0, void 0, function* () {
-            // Implement in next steps
+            try {
+                yield this.dao.remove(people);
+                this.notifyPeopleRemoved(people);
+            }
+            catch (error) {
+                let message;
+                if (error instanceof Error) {
+                    message = error.message;
+                }
+                else {
+                    message = "Error removing person";
+                }
+                this.notifyError(message);
+            }
         });
     }
 }

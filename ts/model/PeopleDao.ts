@@ -28,6 +28,21 @@ export class PeopleDao {
   }
 
   public async remove(people: People): Promise<void> {
-    return;
+    try {
+      const response = await fetch(`${this.apiUrl}?id=${people.idpeople}`, {
+        method: "DELETE"
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+    } catch (error) {
+      let message: string;
+      if (error instanceof Error) {
+        message = error.message;
+      } else {
+        message = "Unknown error removing person";
+      }
+      throw new DaoError(message);
+    }
   }
 }

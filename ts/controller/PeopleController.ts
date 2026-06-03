@@ -57,6 +57,17 @@ export class PeopleController implements Observable {
   }
 
   async remove(people: People): Promise<void> {
-    // Implement in next steps
+    try {
+      await this.dao.remove(people);
+      this.notifyPeopleRemoved(people);
+    } catch (error) {
+      let message: string;
+      if (error instanceof Error) {
+        message = error.message;
+      } else {
+        message = "Error removing person";
+      }
+      this.notifyError(message);
+    }
   }
 }
