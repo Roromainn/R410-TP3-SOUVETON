@@ -37,7 +37,28 @@ export class PeopleDao {
     }
     add(people) {
         return __awaiter(this, void 0, void 0, function* () {
-            return people;
+            try {
+                const response = yield fetch(this.apiUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(people, ["name", "phone"])
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                const data = yield response.json();
+                return People.fromRaw(data);
+            }
+            catch (error) {
+                let message;
+                if (error instanceof Error) {
+                    message = error.message;
+                }
+                else {
+                    message = "Unknown error adding person";
+                }
+                throw new DaoError(message);
+            }
         });
     }
     remove(people) {

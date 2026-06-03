@@ -24,7 +24,26 @@ export class PeopleDao {
   }
 
   public async add(people: People): Promise<People> {
-    return people;
+    try {
+      const response = await fetch(this.apiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(people, ["name", "phone"])
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      const data = await response.json();
+      return People.fromRaw(data);
+    } catch (error) {
+      let message: string;
+      if (error instanceof Error) {
+        message = error.message;
+      } else {
+        message = "Unknown error adding person";
+      }
+      throw new DaoError(message);
+    }
   }
 
   public async remove(people: People): Promise<void> {

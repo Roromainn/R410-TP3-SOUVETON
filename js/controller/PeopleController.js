@@ -54,7 +54,20 @@ export class PeopleController {
     }
     add(people) {
         return __awaiter(this, void 0, void 0, function* () {
-            // Implement in next steps
+            try {
+                const result = yield this.dao.add(people);
+                this.notifyPeopleAdded(result);
+            }
+            catch (error) {
+                let message;
+                if (error instanceof Error) {
+                    message = error.message;
+                }
+                else {
+                    message = "Error adding person";
+                }
+                this.notifyError(message);
+            }
         });
     }
     remove(people) {

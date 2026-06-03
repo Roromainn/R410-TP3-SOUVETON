@@ -53,7 +53,18 @@ export class PeopleController implements Observable {
   }
 
   async add(people: People): Promise<void> {
-    // Implement in next steps
+    try {
+      const result = await this.dao.add(people);
+      this.notifyPeopleAdded(result);
+    } catch (error) {
+      let message: string;
+      if (error instanceof Error) {
+        message = error.message;
+      } else {
+        message = "Error adding person";
+      }
+      this.notifyError(message);
+    }
   }
 
   async remove(people: People): Promise<void> {
