@@ -44,9 +44,12 @@ export class MainView {
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {
+            var _a, _b, _c, _d;
             yield this.controller.list();
-            const removeBtn = document.getElementById("remove");
-            removeBtn === null || removeBtn === void 0 ? void 0 : removeBtn.addEventListener("click", () => this.removePeople());
+            (_a = document.getElementById("remove")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => this.removePeople());
+            (_b = document.getElementById("tel")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => this.showphone());
+            (_c = document.getElementById("add")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => this.addPeople());
+            (_d = document.getElementById("validate")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", () => this.validate());
         });
     }
     removePeople() {
@@ -59,8 +62,22 @@ export class MainView {
                 return;
             const people = People.fromRaw({ idpeople: parseInt(idSpan.innerHTML) });
             yield this.controller.remove(people);
-            const tel = document.getElementById("tel");
-            tel === null || tel === void 0 ? void 0 : tel.addEventListener("click", () => this.showphone());
+        });
+    }
+    addPeople() {
+        var _a;
+        (_a = document.querySelector(".add")) === null || _a === void 0 ? void 0 : _a.classList.remove("hidden");
+    }
+    validate() {
+        return __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            const nameInput = document.getElementById("name");
+            const phoneInput = document.getElementById("phone");
+            const people = new People();
+            people.name = nameInput.value;
+            people.phone = phoneInput.value;
+            yield this.controller.add(people);
+            (_a = document.querySelector(".add")) === null || _a === void 0 ? void 0 : _a.classList.add("hidden");
         });
     }
     select(element) {

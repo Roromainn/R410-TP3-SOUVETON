@@ -50,8 +50,10 @@ export class MainView implements Observer {
 
   async init(): Promise<void> {
     await this.controller.list();
-    const removeBtn = document.getElementById("remove");
-    removeBtn?.addEventListener("click", () => this.removePeople());
+    document.getElementById("remove")?.addEventListener("click", () => this.removePeople());
+    document.getElementById("tel")?.addEventListener("click", () => this.showphone());
+    document.getElementById("add")?.addEventListener("click", () => this.addPeople());
+    document.getElementById("validate")?.addEventListener("click", () => this.validate());
   }
 
   async removePeople(): Promise<void> {
@@ -61,8 +63,20 @@ export class MainView implements Observer {
     if (!idSpan) return;
     const people = People.fromRaw({ idpeople: parseInt(idSpan.innerHTML) });
     await this.controller.remove(people);
-    const tel = document.getElementById("tel");
-    tel?.addEventListener("click", () => this.showphone())
+  }
+
+  addPeople(): void {
+    document.querySelector(".add")?.classList.remove("hidden");
+  }
+
+  async validate(): Promise<void> {
+    const nameInput = document.getElementById("name") as HTMLInputElement;
+    const phoneInput = document.getElementById("phone") as HTMLInputElement;
+    const people = new People();
+    people.name = nameInput.value;
+    people.phone = phoneInput.value;
+    await this.controller.add(people);
+    document.querySelector(".add")?.classList.add("hidden");
   }
 
   select(element : HTMLLIElement):void{
